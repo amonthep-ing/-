@@ -1,0 +1,530 @@
+/* --- สไตล์พื้นฐาน --- */
+body {
+  margin: 0;
+  font-family: 'Prompt', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  position: relative;
+  background: url('images/header-bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Overlay สีดำใสครอบภาพเพื่อให้ข้อความโดดเด่น */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* ปรับความเข้มได้ตามต้องการ */
+  z-index: 1;
+}
+
+header h1, header nav {
+  position: relative;
+  z-index: 2; /* ให้อยู่เหนือ overlay */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* เพิ่มเงาให้ข้อความอ่านง่าย */
+}
+
+ /* --- Footer --- */
+    footer {
+      background-color: #34495e;
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+    footer p {
+      margin: 0.3rem 0;
+    }
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background: #444;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: #666;
+}
+
+main {
+  max-width: 980px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.96);
+  color: #222;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  line-height: 1.75;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* หัวข้อกลางหน้าหลัก */
+main > h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #1f2937;
+}
+
+/* ส่วนเนื้อหาเกี่ยวกับภูกระดึง */
+#about-phu-kra-dueng {
+  margin-top: 1.25rem;
+}
+
+/* หัวข้อแต่ละส่วน */
+#about-phu-kra-dueng h2,
+#about-phu-kra-dueng h3,
+#about-phu-kra-dueng h4,
+#about-phu-kra-dueng h5,
+#about-phu-kra-dueng h6 {
+  color: #0f172a;
+  margin: 1rem 0 0.6rem;
+  line-height: 1.2;
+}
+#about-phu-kra-dueng h2 { font-size: 1.4rem; }
+#about-phu-kra-dueng h3 { font-size: 1.05rem; }
+#about-phu-kra-dueng h4 { font-size: 1rem; }
+#about-phu-kra-dueng h5 { font-size: 0.95rem; }
+#about-phu-kra-dueng h6 { font-size: 0.9rem; }  
+
+/* ย่อหน้าให้ชิดชัดและอ่านง่าย */
+#about-phu-kra-dueng p {
+  text-align: justify;
+  margin: 0 0 0.95rem;
+  word-wrap: break-word;
+}
+
+/* รูปภาพภายใน main */
+main img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* รายการ (list) ให้มีระยะห่าง */
+main ul {
+  padding-left: 1.1rem;
+  margin: 0 0 1rem;
+}
+main li { margin-bottom: 0.6rem; }
+
+/* บล็อกข้อมูลติดต่อ */
+#about-phu-kra-dueng p.contact {
+  background: rgba(15,23,42,0.03);
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+  }
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+  .images {
+    grid-template-columns: 1fr;
+  }
+  .hotel-item {
+    margin-bottom: 2rem;
+  }
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#viewer {
+  width: 100%;
+  height: 100vh; /* เต็มความสูงหน้าจอ */
+  max-width: 100%; /* ป้องกันล้นขอบ */
+}
+
+   nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2, h3, h4, h5, h6{
+      color: #2d6a4f;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      background: #010101;
+      color: white;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    a {
+      color: #1b4332;
+    }
+
+    /* Gallery Styles */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.2s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+
+    .hamburger { display: none; background: transparent; border: 0; cursor: pointer; }
+    .hamburger span { display:block; width:24px; height:2px; background:#000; margin:5px 0; transition: .2s; }
+
+    @media (max-width:768px){
+      .hamburger { display: inline-block; }
+      .site-nav { display: none; flex-direction: column; gap:8px; }
+      .site-nav.open { display: flex; }
+    }
+
+    /* Responsive nav: ถ้าความกว้างแคบ ให้เลื่อนแนวนอนได้เอง หรือกลายเป็นคอลัมน์บนจอเล็กมาก */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 0.5rem;
+      overflow-x: auto;                /* อนุญาตให้เลื่อนแนวนอนเมื่อไม่พอ */
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      /* ป้องกันการหายใจของเงา/ขอบเมื่อเลื่อน */
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* บังคับให้เมนูยังคงเป็นแถวแนวนอนบนหน้าจอเล็ก */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        justify-content: flex-start;
+        padding-left: 0.5rem;
+      }
+      nav a {
+        width: auto !important;
+        white-space: nowrap;
+        display: inline-block;
+        padding: 0.45rem 0.75rem;
+      }
+    }
+
+    /* บังคับให้เมนูใน header เป็นแถวเดียว (ไม่ห่อ) และเลื่อนแนวนอนได้เมื่อพื้นที่ไม่พอ */
+    header nav {
+      display: flex;
+      flex-direction: row !important;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 0.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+
+    /* ปรับสไตล์ scrollbar เล็กน้อย (ไม่กระทบทุกเบราว์เซอร์) */
+    header nav::-webkit-scrollbar { height: 8px; }
+    header nav::-webkit-scrollbar-track { background: transparent; }
+    header nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+
+    /* แต่ละลิงก์ไม่ย่อบรรทัด รักษารูปแบบปุ่ม */
+    header nav a {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+    }
+
+    /* บนจอเล็กมาก ย่อขนาดปุ่ม แต่ยังคงเป็นแถวเดียว (เลื่อนได้) */
+    @media (max-width: 480px) {
+      header nav { justify-content: flex-start; padding-left: 0.6rem; }
+      header nav a { padding: 0.45rem 0.75rem; font-size: 0.95rem; }
+    }
+
+/* ให้ปุ่มเมนูหดขยายเท่ากันเพื่อให้เห็นทั้งหมดบนแถวเดียว */
+header nav,
+nav {
+  flex-wrap: nowrap; /* ยืนยันไม่ให้ห่อบรรทัด */
+  overflow-x: hidden; /* ปิดการเลื่อนเป็นค่าเริ่มต้น ถ้าต้องการเลื่อนให้เปลี่ยนเป็น auto */
+}
+
+/* ปรับให้แต่ละลิงก์หดได้ (แบ่งพื้นที่เท่าๆ กัน) */
+header nav a,
+nav a {
+  flex: 1 1 0;        /* ขยายและหดได้ แบ่งพื้นที่เท่าๆ กัน */
+  min-width: 0;       /* สำคัญเพื่อให้ flex-item หดจริงๆ */
+  box-sizing: border-box;
+  white-space: nowrap; /* ไม่ห่อคำภายในปุ่ม */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ถ้าป้ายยาว จะตัดและมี ... */
+  font-size: clamp(13px, 2.6vw, 16px); /* ปรับขนาดตัวหนังสือตามหน้าจอ */
+  padding: 0.35rem 0.5rem; /* ลดขนาด padding เพื่อให้พอดีขึ้น */
+}
+
+/* บนจอเล็กมาก ลดช่องว่างและขนาดอีกเล็กน้อย */
+@media (max-width: 420px) {
+  header nav, nav { gap: 6px; padding-left: 0.3rem; padding-right: 0.3rem; }
+  header nav a, nav a { padding: 0.3rem 0.4rem; font-size: clamp(12px, 3.2vw, 14px); }
+}
+
+/* ---------- mobile single-menu (select) ---------- */
+/* ซ่อน select เป็นค่าเริ่มต้น (เดสก์ท็อป) */
+.mobile-nav-select {
+  display: none;
+  font-size: 1rem;
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  width: calc(100% - 2rem);
+  max-width: 420px;
+  margin: 0.5rem auto;
+  box-sizing: border-box;
+}
+
+/* เมื่อขนาดหน้าจอแคบมาก ให้เปลี่ยนเป็น select แทน nav */
+@media (max-width: 420px) {
+  header nav { display: none !important; }       /* ซ่อนเมนูปกติ */
+  .mobile-nav-select { display: block; }         /* แสดง select */
+}
+
+/* ปรับสำหรับหน้าจอเล็ก */
+@media (max-width: 600px) {
+  main {
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 0.98rem;
+  }
+  main > h2 { font-size: 1.3rem; }
+  #about-phu-kra-dueng h3 { font-size: 1rem; }
+}
+
+/* ปรับการพิมพ์ (print) ให้อ่านง่าย */
+@media print {
+  header { background: none; color: black; -webkit-print-color-adjust: exact; }
+  header::before { display: none; }
+  nav { display: none; }
+  main { box-shadow: none; background: #fff; border-radius: 0; }
+}
+
+.site-footer {
+  background:#222;
+  color:#fff;
+  padding:1rem 0.75rem;
+  font-size:0.95rem;
+  text-align:center;
+}
+.site-footer .container { max-width:980px; margin:0 auto; }
+@media (max-width:600px){
+  .site-footer { font-size:0.9rem; padding:0.8rem 0.5rem; }
+}
+
+/* --- Icon nav helpers --- */
+/* Center icon content inside the nav links */
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Size for the Font Awesome icons used in the nav */
+.nav-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Visually hidden text for screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Hotels list styles */
+.hotels-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.hotel-item {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hotel-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.images img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.hotel-info {
+  padding: 2rem;
+}
+
+.hotel-info h3 {
+  margin-top: 0;
+  color: #2d6a4f;
+  font-size: 1.2rem;
+}
+
+.hotel-info p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Modal styles for image zoom */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  object-fit: contain;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+}
+
+/* Book button styles */
+.book-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #2d6a4f;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.book-btn:hover {
+  background-color: #1f4e3a;
+}

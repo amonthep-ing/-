@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ภาพ 360°</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@5/dist/photo-sphere-viewer.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+  <style>
+    .select-container {
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    #viewer {
+      display: flex;            /* ใช้ flexbox */
+      justify-content: center;  /* จัดกึ่งกลางแนวนอน */
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+    }
+     #viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ภาพ 360°</h1>
+    <nav>
+      <a href="index.html" aria-label="หน้าแรก" title="หน้าแรก">
+        <i class="fa-solid fa-house nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">หน้าแรก</span>
+      </a>
+
+      <a href="history.html" aria-label="ประวัติ" title="ประวัติ">
+        <i class="fa-solid fa-book nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">ประวัติ</span>
+      </a>
+
+      <a href="shops.html" aria-label="ร้านค้า" title="ร้านค้า">
+        <i class="fa-solid fa-shop nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">ร้านค้า</span>
+      </a>
+
+      <a href="hotels.html" aria-label="ที่พัก" title="ที่พัก">
+        <i class="fa-solid fa-bed nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">ที่พัก</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 style="text-align:center;">เลือกสถานที่เพื่อชมภาพ 360°</h2>
+
+    <div class="select-container">
+      
+      <select id="placeSelect">
+ 
+  <option value="">-- เลือกสถานที่ --</option>
+    <option value="https://momento360.com/e/u/adf55c9680ab4bd6a7025be54bc4fc7c?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=79&size=medium&display-plan=true">ปางกกค่า</option>
+  <option value="https://momento360.com/e/u/f29502c5522244f88df782f2734b7357?utm_campaign=embed&utm_source=other&heading=93.72&pitch=-1.87&field-of-view=75&size=medium&display-plan=true">
+    ซำแฮก</option>
+  <option value="https://momento360.com/e/u/ba24e9ab87d849bc877452cc8f6e6800?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกกอก</option>
+      <option value="https://momento360.com/e/u/c8b596d661904dbd828a5800f6d73037?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกหว้า</option>
+  <option value="https://momento360.com/e/u/ab3bba76552649d68fa0b68597b3ce57?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกไผ่</option>
+    <option value="https://momento360.com/e/u/75d7936df16e464c845f7146179b90cc?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกโดน</option>
+    <option value="https://momento360.com/e/u/e48c3bf89bf14cf6985c3eb969f6e179?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">หลังแป</option>
+</select>
+
+<div id="viewer" style="margin-top: 50px;">
+  <p>กรุณาเลือกสถานที่</p>
+</div>
+
+<script>
+document.getElementById('placeSelect').addEventListener('change', function() {
+  const viewer = document.getElementById('viewer');
+  if (this.value) {
+    viewer.innerHTML = `<iframe src="${this.value}" allowfullscreen></iframe>`;
+  } else {
+    viewer.innerHTML = "<p>กรุณาเลือกสถานที่</p>";
+  }
+});
+</script>
+  </div>
+  </main>
+
+  <script>
+    const viewerContainer = document.getElementById('viewer');
+    let viewer = null;
+
+    document.getElementById('locationSelect').addEventListener('change', function() {
+      const selectedPanorama = this.value;
+
+      if (!selectedPanorama) {
+        viewerContainer.innerHTML = ""; // ล้างจอถ้าไม่ได้เลือก
+        return;
+      }
+
+      // สร้าง viewer ใหม่ทุกครั้งที่เปลี่ยนสถานที่
+      viewerContainer.innerHTML = ""; 
+      viewer = new PhotoSphereViewer.Viewer({
+        container: viewerContainer,
+        panorama: selectedPanorama,
+        touchmoveTwoFingers: true,
+      });
+    });
+  </script>
+  <!-- footer จะถูกใส่โดย load-footer.js -->
+  <div id="footer-container"></div>
+
+  <script src="js/load-footer.js"></script>
+</body>
+</html>

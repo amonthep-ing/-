@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ที่พัก</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+</head>
+<body>
+  <header>
+    <h1>ที่พัก</h1>
+    <nav>
+      <a href="index.html" aria-label="หน้าแรก" title="หน้าแรก">
+        <i class="fa-solid fa-house nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">หน้าแรก</span>
+      </a>
+
+      <a href="360.html" aria-label="เลือกสถานที่" title="เลือกสถานที่">
+        <i class="fa-solid fa-map-pin nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">เลือกสถานที่</span>
+      </a>
+
+      <a href="history.html" aria-label="ประวัติ" title="ประวัติ">
+        <i class="fa-solid fa-book nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">ประวัติ</span>
+      </a>
+
+      <a href="shops.html" aria-label="ร้านค้า" title="ร้านค้า">
+        <i class="fa-solid fa-shop nav-icon" aria-hidden="true"></i>
+        <span class="sr-only">ร้านค้า</span>
+      </a>
+    </nav>
+  </header>
+
+<main>
+<h2 style="text-align:center;">ที่พัก</h2>
+    <div class="hotels-list">
+      <div class="hotel-item">
+        <div class="images">
+          <img src="images/hotel1.1.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+          <img src="images/hotel1.2.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+          <img src="images/hotel1.3.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+          <img src="images/hotel1.4.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+          <img src="images/hotel1.5.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+          <img src="images/hotel1.6.jpg" alt="ภูกระดึง 202 (ศรีฐาน 1)" ondblclick="openModal(this.src)">
+        </div>
+        <div class="hotel-info">
+          <h3>ภูกระดึง 202 (ศรีฐาน 1)</h3>
+          <p>โซน 2 โซนที่ทำการอุทยานแห่งชาติ (โซนศรีฐาน) อยู่ด้านล่างก่อนขึ้นภูกระดึง บริการบ้านพัก ห้องประชุม<br>
+          <br>
+          สิ่งอำนวยความสะดวก เครื่องนอน 6 ฟุต, เครื่องปรับอากาศ, พัดลม, โทรทัศน์, ตู้เย็น, กระติกน้ำร้อน, เครื่องทำน้ำอุ่น, ผ้าเช็ดตัว<br>
+          (บ้านพักอยู่ด้านล่างก่อนขึ้นภูกระดึง)<br>
+          ประเภทห้อง เตียงเดี่ยว<br>
+          จำนวนคน 4<br>
+          จำนวนห้องนอน 1<br>
+          จำนวนห้องน้ำ 1</p>
+          <a href="https://nps.dnp.go.th/reservation.php?id=62" class="book-btn">จองที่พัก</a>
+        </div>
+      </div>
+      <div class="hotel-item">
+        <div class="images">
+          <img src="images/hotel2.1.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+          <img src="images/hotel2.2.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+          <img src="images/hotel2.3.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+          
+        </div>
+        <div class="hotel-info">
+          <h3>ภูกระดึง 111/2 (หยาดน้ำค้าง)</h3>
+          <p>โซน 1 โซนหน่วยพิทักษ์ฯ วังกวาง (โซนวังกวาง) อยู่บนยอดภูกระดึง บ้านพัก เต็นท์ ลานกางเต็นท์<br>
+          <br>
+          สิ่งอำนวยความสะดวก เครื่องนอน 3.5 ฟุต, ห้องน้ำ-สุขารวม<br>
+          ประเภทห้อง เตียงเดี่ยว<br>
+          จำนวนคน 10<br>
+          จำนวนห้องนอน 1<br>
+          จำนวนห้องน้ำ 1</p>
+          <a href="https://nps.dnp.go.th/reservation.php?id=62" class="book-btn">จองที่พัก</a>
+        </div>
+      </div>
+      <div class="hotel-item">
+        <div class="images">
+          <img src="images/hotel3.1.jpg" alt="โฮมสเตย์ชุมชน" ondblclick="openModal(this.src)">
+          <img src="images/hotel3.2.jpg" alt="โฮมสเตย์ชุมชน" ondblclick="openModal(this.src)">
+          <img src="images/hotel3.3.jpg" alt="โฮมสเตย์ชุมชน" ondblclick="openModal(this.src)">
+        </div>
+        <div class="hotel-info">
+          <h3>ภูกระดึง 117 (เอพริล 1)</h3>
+          <p>โซน 1 โซนหน่วยพิทักษ์ฯ วังกวาง (โซนวังกวาง) อยู่บนยอดภูกระดึง บ้านพัก เต็นท์ ลานกางเต็นท์<br>
+          ระยะห่างที่ทำการ (kg)<br>
+          <br>
+          สิ่งอำนวยความสะดวก มีเครื่องนอน, เครื่องทำน้ำอุ่น<br>
+          ประเภทห้อง เตียงเดี่ยว<br>
+          จำนวนคน 4<br>
+          จำนวนห้องนอน 2<br>
+          จำนวนห้องน้ำ 2</p>
+          <a href="https://nps.dnp.go.th/reservation.php?id=62" class="book-btn">จองที่พัก</a>
+        </div>
+      </div>
+      <div class="hotel-item">
+        <div class="images">
+          <img src="images/hotel4.1.jpg" alt="บ้านพักซำแฮก" ondblclick="openModal(this.src)">
+          <img src="images/hotel4.2.jpg" alt="บ้านพักซำแฮก" ondblclick="openModal(this.src)">
+          <img src="images/hotel4.3.jpg" alt="บ้านพักซำแฮก" ondblclick="openModal(this.src)">
+        </div>
+        <div class="hotel-info">
+          <h3>ภูกระดึง 107 (ทรงบาดาล)</h3>
+          <p>โซน 1 โซนหน่วยพิทักษ์ฯ วังกวาง (โซนวังกวาง) อยู่บนยอดภูกระดึง บ้านพัก เต็นท์ ลานกางเต็นท์<br>
+          ระยะห่างที่ทำการ (kg)<br>
+          <br>
+          สิ่งอำนวยความสะดวก เครื่องนอน 3.5 ฟุต, เครื่องทำน้ำอุ่น, ผ้าเช็ดตัว<br>
+          ประเภทห้อง เตียงเดี่ยว<br>
+          จำนวนคน 5<br>
+          จำนวนห้องนอน 2<br>
+          จำนวนห้องน้ำ 1</p>
+          <a href="https://nps.dnp.go.th/reservation.php?id=62" class="book-btn">จองที่พัก</a>
+        </div>
+      </div>
+      <div class="hotel-item">
+        <div class="images">
+          <img src="images/5.1.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+          <img src="images/5.2.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+          <img src="images/5.3.jpg" alt="รีสอร์ทริมแม่น้ำ" ondblclick="openModal(this.src)">
+        </div>
+        <div class="hotel-info">
+          <h3>ลานวังกวาง (พื้นที่กางเต็นท์)</h3>
+          <p>โซนหน่วยพิทักษ์ฯ วังกวาง อยู่ด้านบนยอดภูกระดึง เป็นการจองพื้นที่สำหรับกางเต็นท์ ผู้ใช้บริการต้องนำเต็นท์ไปเอง ต้องจองพื้นที่ให้เหมาะสมกับขนาดเต็นท์ ทำการจองได้ครั้งละ 5 คน ต่อ 1 การคลิ๊กค้นหา<br>
+          <br>
+          จำนวนคน 1</p>
+          <a href="https://nps.dnp.go.th/reservation.php?id=62" class="book-btn">จองที่พัก</a>
+        </div>
+      </div>
+</main>
+
+  <!-- footer จะถูกใส่โดย load-footer.js -->
+  <div id="footer-container"></div>
+
+    <!-- Modal for image zoom -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script>
+    function openModal(src) {
+      document.getElementById('imageModal').style.display = "block";
+      document.getElementById('modalImg').src = src;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = "none";
+    }
+
+    // Close modal when clicking outside the image
+    window.onclick = function(event) {
+      var modal = document.getElementById('imageModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+  <script src="js/load-footer.js"></script>
+</body>
+</html>
