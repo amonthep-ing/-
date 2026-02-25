@@ -9,28 +9,89 @@
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
   <style>
-    .select-container {
-      max-width: 400px;
-      margin: 20px auto;
-      text-align: center;
+    /* Gallery styles */
+    .gallery {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 0 12px;
     }
-    select {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
+    @media (max-width: 900px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .gallery { grid-template-columns: 1fr; }
+    }
+    .gallery figure {
+      margin: 0;
+      background: #fff;
       border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
     }
-    #viewer {
-      display: flex;            /* ใช้ flexbox */
-      justify-content: center;  /* จัดกึ่งกลางแนวนอน */
+    .gallery .thumb { height: 140px; overflow: hidden; }
+    .gallery img { width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+    .gallery figcaption {
+      padding: 8px 6px;
+      font-size: 14px;
+      color: #222;
+      word-break: break-word;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
       width: 100%;
-      height: 500px;
-      margin-top: 20px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
     }
-     #viewer iframe {
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      width: 95%;
+      height: 90%;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal iframe {
       width: 100%;
       height: 100%;
       border: none;
+    }
+    #modalViewerContent {
+      width: 100%;
+      height: 100%;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      z-index: 1001;
+    }
+    .modal-close:hover {
+      background: rgba(0, 0, 0, 0.9);
     }
   </style>
 </head>
@@ -63,59 +124,92 @@
   <main>
     <h2 style="text-align:center;">เลือกสถานที่เพื่อชมภาพ 360°</h2>
 
-    <div class="select-container">
-      
-      <select id="placeSelect">
- 
-  <option value="">-- เลือกสถานที่ --</option>
-    <option value="https://momento360.com/e/u/adf55c9680ab4bd6a7025be54bc4fc7c?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=79&size=medium&display-plan=true">ปางกกค่า</option>
-  <option value="https://momento360.com/e/u/f29502c5522244f88df782f2734b7357?utm_campaign=embed&utm_source=other&heading=93.72&pitch=-1.87&field-of-view=75&size=medium&display-plan=true">
-    ซำแฮก</option>
-  <option value="https://momento360.com/e/u/ba24e9ab87d849bc877452cc8f6e6800?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกกอก</option>
-      <option value="https://momento360.com/e/u/c8b596d661904dbd828a5800f6d73037?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกหว้า</option>
-  <option value="https://momento360.com/e/u/ab3bba76552649d68fa0b68597b3ce57?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกไผ่</option>
-    <option value="https://momento360.com/e/u/75d7936df16e464c845f7146179b90cc?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">ซำกกโดน</option>
-    <option value="https://momento360.com/e/u/e48c3bf89bf14cf6985c3eb969f6e179?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true">หลังแป</option>
-</select>
+    <!-- Gallery generated from the places array: clickable thumbnails + captions (moved above viewer) -->
+    <section id="gallery-section">
+      <h3 style="text-align:center;margin-top:10px;">ภาพตัวอย่าง</h3>
+      <div class="gallery" id="galleryGrid" aria-live="polite"></div>
+    </section>
 
-<div id="viewer" style="margin-top: 50px;">
-  <p>กรุณาเลือกสถานที่</p>
-</div>
+    <!-- Modal for fullscreen 360 viewer -->
+    <div id="imageModal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="document.getElementById('imageModal').classList.remove('active')">&times;</button>
+        <div id="modalViewerContent"></div>
+      </div>
+    </div>
 
-<script>
-document.getElementById('placeSelect').addEventListener('change', function() {
-  const viewer = document.getElementById('viewer');
-  if (this.value) {
-    viewer.innerHTML = `<iframe src="${this.value}" allowfullscreen></iframe>`;
-  } else {
-    viewer.innerHTML = "<p>กรุณาเลือกสถานที่</p>";
-  }
-});
-</script>
-  </div>
+    <script>
+      (function(){
+        const gallery = document.getElementById('galleryGrid');
+        if (!gallery) return;
+        const places = [
+          {url: "https://momento360.com/e/u/adf55c9680ab4bd6a7025be54bc4fc7c?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=79&size=medium&display-plan=true", title: "ปางกกค่า"},
+          {url: "https://momento360.com/e/u/f29502c5522244f88df782f2734b7357?utm_campaign=embed&utm_source=other&heading=93.72&pitch=-1.87&field-of-view=75&size=medium&display-plan=true", title: "ซำแฮก"},
+          {url: "https://momento360.com/e/u/ba24e9ab87d849bc877452cc8f6e6800?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ซำกกกอก"},
+          {url: "https://momento360.com/e/u/c8b596d661904dbd828a5800f6d73037?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ซำกกหว้า"},
+          {url: "https://momento360.com/e/u/ab3bba76552649d68fa0b68597b3ce57?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ซำกกไผ่"},
+          {url: "https://momento360.com/e/u/75d7936df16e464c845f7146179b90cc?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ซำกกโดน"},
+          {url:"https://momento360.com/e/u/dddefb8732c64cb3b63c70cb32a4613c?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ซำกอชาง"},
+          {url: "https://momento360.com/e/u/e48c3bf89bf14cf6985c3eb969f6e179?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "หลังแป"},
+          {url:"https://momento360.com/e/u/dfbef82878ad46e19889a52b749deeda?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "พื้นที่ตั้งแค้มป์"},
+          {url:"https://momento360.com/e/u/fc3874c77d1c4eb5b58e79a032e01175?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ร้านอาหาร"},
+          {url:"https://momento360.com/e/u/1f6b7eab13104db9b72bf7dd1fa90950?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ศูนย์บริการนักท่องเที่ยว"},
+          {url: "https://momento360.com/e/u/90210fde998e48e1936b80f2df235d5f?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=81&size=medium&display-plan=true", title: "สระอโนดาต"},
+          {url:"https://momento360.com/e/u/8f0741eb3b8b43ad8d05ae8743c3ed62?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "น้ำตกถ้ำสอเหนือ"},
+          {url:"https://momento360.com/e/u/f7733aa185224668a8d784cacaafb895?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "น้ำตกถ้ำใหญ่"},
+          {url:"https://momento360.com/e/u/f6a34fb18f7f4cc38ec56cd9b6572b30?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "น้ำตกเพ็ญพบใหม่"},
+          {url:"https://momento360.com/e/u/0d247d7441d94c118941738400682c3b?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "บ้านภูกระดึง 110 เทียนน้ำ1-5"},
+          {url:"https://momento360.com/e/u/33435c3383964b229dbd60d6cd3d741b?utm_campaign=embed&utm_source=other&heading=73.59&pitch=-30.47&field-of-view=75&size=medium&display-plan=true", title: "ผาแดง"},
+          {url:"https://momento360.com/e/u/881ab1796a9b404fb5f863f6cddfce86?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ผานกแอ่น"},
+          {url:"https://momento360.com/e/u/2517519e8f5a4f2b8581d75ec84b7317?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ผาเมฆา"},
+          {url:"https://momento360.com/e/u/a4caf601bc3949a386a303c040ac04c9?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ผาหมากดูก"},
+          {url:"https://momento360.com/e/u/6ef44712ccd34fe4991ab85b3052985e?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true", title: "ผาหล่มสัก"}
+        ];
+
+        places.forEach(place => {
+          const figure = document.createElement('figure');
+          const thumb = document.createElement('div');
+          thumb.className = 'thumb';
+          const img = document.createElement('img');
+          img.setAttribute('loading', 'lazy');
+          img.alt = place.title;
+          img.src = `image/${place.title}.jpg`;
+          img.onerror = () => {
+            img.onerror = null;
+            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="%23ddd"/><text x="50%" y="55%" font-size="14" dominant-baseline="middle" text-anchor="middle" fill="%23666">ไม่มีรูปภาพ</text></svg>';
+          };
+          thumb.appendChild(img);
+
+          const caption = document.createElement('figcaption');
+          caption.textContent = place.title;
+
+          figure.appendChild(thumb);
+          figure.appendChild(caption);
+          
+          // Add click handler to open the embed in fullscreen modal
+          figure.addEventListener('click', () => {
+            const modal = document.getElementById('imageModal');
+            const content = document.getElementById('modalViewerContent');
+            if (modal && content) {
+              content.innerHTML = `<iframe src="${place.url}" allowfullscreen></iframe>`;
+              modal.classList.add('active');
+            }
+          });
+
+          gallery.appendChild(figure);
+        });
+
+        // Close modal when clicking outside the content
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+          if (e.target.id === 'imageModal') {
+            e.target.classList.remove('active');
+          }
+        });
+      })();
+      </script>
   </main>
 
-  <script>
-    const viewerContainer = document.getElementById('viewer');
-    let viewer = null;
-
-    document.getElementById('locationSelect').addEventListener('change', function() {
-      const selectedPanorama = this.value;
-
-      if (!selectedPanorama) {
-        viewerContainer.innerHTML = ""; // ล้างจอถ้าไม่ได้เลือก
-        return;
-      }
-
-      // สร้าง viewer ใหม่ทุกครั้งที่เปลี่ยนสถานที่
-      viewerContainer.innerHTML = ""; 
-      viewer = new PhotoSphereViewer.Viewer({
-        container: viewerContainer,
-        panorama: selectedPanorama,
-        touchmoveTwoFingers: true,
-      });
-    });
-  </script>
+  
   <!-- footer จะถูกใส่โดย load-footer.js -->
   <div id="footer-container"></div>
 
